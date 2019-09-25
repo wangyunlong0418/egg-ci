@@ -10,7 +10,7 @@ branches:
 before_install:
   - npm i
 script:
-  - npm run build
+  - npm start
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t /app .
   - docker push 18410408685/egg-ci:latest
