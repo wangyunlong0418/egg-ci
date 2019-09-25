@@ -2,11 +2,15 @@ sudo: false
 language: node_js
 node_js:
   - '10'
+services:
+- docker
+branches:
+  only:
+    - master
 before_install:
-  - npm i npminstall -g
-install:
-  - npminstall
+  - npm i
 script:
-  - npm run ci
-after_script:
-  - npminstall codecov && codecov
+  - npm run build
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t /app .
+  - docker push 18410408685/egg-ci:latest

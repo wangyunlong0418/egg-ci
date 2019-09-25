@@ -12,6 +12,6 @@ COPY package.json /app/package.json
 
 RUN npm i --registry=https://registry.npm.taobao.org
 
-EXPOSE 3000
+EXPOSE 7001
 
 CMD ["npm", "start"]
