@@ -16,5 +16,6 @@ script:
   - npm run test
 after_success: 
   - ssh root@106.13.110.53 'cd ~/workspace/egg-ci && git pull origin master'
+  - npm stop
   - npm i && npm start
 
