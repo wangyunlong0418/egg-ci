@@ -16,7 +16,8 @@ before_install:
 #   - npm i 
 #   - npm run ci
 after_success: 
-  - ssh root@106.13.110.53 'rm -rf ~/workspace/projects/egg-ci && cd ~/workspace/projects/egg-ci && git pull origin master'
+  - ssh root@106.13.110.53 
+  - git clone git@github.com:wangyunlong0418/egg-ci.git
   - npm stop
   - npm start
 
