@@ -1,16 +1,20 @@
 sudo: false
 language: node_js
 node_js:
-  - '10'
-services:
-- docker
+- '10'
+# services:
+# - docker
 branches:
   only:
-    - master
+  - master
 before_install:
-  - npm i
+  - openssl aes-256-cbc -K $encrypted_e78e639a7c28_key -iv $encrypted_e78e639a7c28_iv
+    -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
+  - echo -e "Host 106.13.110.53\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 script:
-  - npm start
-  - docker build -t egg-ci .
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push 18410408685/egg-ci:latest
+  - npm run test
+after_success: 
+  - ssh root@106.13.110.53 'cd ~/workspace/egg-ci && git pull origin master'
+  - npm i && npm start
+
