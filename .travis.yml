@@ -12,9 +12,9 @@ before_install:
     -in id_rsa.enc -out ~/.ssh/id_rsa -d
   - chmod 600 ~/.ssh/id_rsa
   - echo -e "Host 106.13.110.53\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-script:
-  - npm i 
-  - npm run ci
+# script:
+#   - npm i 
+#   - npm run ci
 after_success: 
   - ssh root@106.13.110.53 'cd ~/workspace/egg-ci && git pull origin master'
   - npm stop
